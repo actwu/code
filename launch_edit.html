@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          
+    <meta name="theme-color" content="#191919">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Cordzip</title>
+    <meta property="og:title" content="Cordzip">
+    <meta property="og:description" content="Cordzip Online Editor">
+    <meta property="og:image" content="https://cordzip.web.app/img/banner.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cordzip">
+    <meta name="twitter:description" content="Cordzip Online Editor">
+    <meta name="twitter:image" content="https://cordzip.web.app/img/banner.png">
+    <meta name="twitter:image:alt" content="Cordzip">
+
+<meta property="title" content="Cordzip">
+<meta property="author" content="Cordzip">
+<meta property="image" content="/img/banner.png">
+<meta property="description" content="Cordzip Online Editor">
+    <link rel="shortcut icon" href="https://cordzip.web.app/img/icon.png" type="image/x-icon">
+    <script src="/cz.js"></script>
+</head>
+
+<style>
+    textarea {
+        color: #569cd6;
+    }
+
+    textarea:focus {
+       outline: none;
+    }
+
+</style>
+
+<body>
+
+    <section id="page1" class="fullscreen center dark">
+
+    <div class="head">
+       <span class="item-left space2">
+        <i class="fa-solid fa-code-compare"></i>
+        <p class="mid">Cordzip</p>
+       </span>
+    </div>
+     <span class="item port">
+        <span class="item">
+        <a onclick="project()"
+        class="mid-p dark2-bg small-m rounded">
+        <i class="fa-solid fa-folder red big"></i>
+
+        <p class="caps quick">Saved Project</p>
+        </a>
+
+        <a onclick="project2()"
+        class="mid-p dark2-bg small-m rounded">
+        <i class="fa-solid fa-folder blue big"></i>
+
+        <p class="caps quick">Saved Project 2</p>
+        </a>
+        </span>
+
+      <span class="item">
+        <a onclick="project3()"
+        class="mid-p dark2-bg small-m rounded">
+        <i class="fa-solid fa-folder yell big"></i>
+
+        <p class="caps quick">Saved Project 3</p>
+        </a>
+   
+        <a onclick="page4()"
+        class="mid-p dark2-bg small-m rounded">
+        <i class="fa-solid fa-add white mid"></i>
+        <p class="caps bold quick">start new project</p>
+        </a>
+      </span>
+     </span>
+
+    </section>
+
+    <section id="page2" class="hide fullscreen center dark">
+
+        <div class="hide" id="slider1">
+            <textarea name="" id="a" class="fullscreen big-my
+            scrollable dark-bg small-p fullsize layer"
+             style="height:90vh;"
+             ></textarea>
+        </div>
+
+        <div class="hide" id="slider2">
+            <textarea name="" id="b" class="fullscreen big-my
+            scrollable dark-bg small-p fullsize layer"
+             style="height:90vh;"
+             ></textarea>
+        </div>
+
+        <div class="hide" id="slider3">
+            <textarea name="" id="c" class="fullscreen big-my
+            scrollable dark-bg small-p fullsize layer"
+             style="height:90vh;"
+             ></textarea>
+        </div>
+
+        <div class="hide" id="slider4">
+            <textarea name="" id="d" class="fullscreen big-my
+            scrollable dark-bg small-p fullsize layer"
+             style="height:90vh;"
+             ></textarea>
+        </div>
+
+
+        <div class="hide" id="slider5">
+            <textarea name="" id="e" class="fullscreen big-my
+            scrollable dark-bg small-p fullsize layer"
+             style="height:90vh;"
+             ></textarea>
+        </div>
+       
+       <div class="foot mobile-ui">
+           
+        <span class="item space2 item-right">
+            <a onclick="page3(), adel()">
+            <i class="fa-solid fa-save white small"></i>
+            </a>
+
+            <a onclick="page5()">
+                <i class="fa-solid fa-code white small"></i>
+                </a>
+            
+             <a onclick="page1()">
+                <p class="white center">cz</p>
+            </a>
+            
+        </span>
+
+        </div>
+
+        <div class="head pc-ui">
+           
+            <span class="item space2 item-left">
+
+                <a onclick="page1()">
+                    <p class="white center">cz</p>
+                </a>
+
+                <a onclick="page3(), adel()">
+                <i class="fa-solid fa-save white small"></i>
+                </a>
+    
+                <a onclick="page5()">
+                    <i class="fa-solid fa-code white small"></i>
+                    </a>
+                
+            </span>
+    
+            </div>
+
+
+   </section>
+
+   <section id="page3" class="hide fullscreen center dark">
+    <span class="item">
+        <p class="caps bold white">
+            save as
+        </p>
+    </span>
+    <span class="item space2">
+
+    <a onclick="save()" href="" download="index.html" 
+    class="dl small-p dark2-bg small-m rounded">
+    <i class="fa-brands fa-html5 red mid"></i>
+    </a>
+
+    <a onclick="savepy()" href="" download="index.py" 
+    class="dlpy  small-p dark2-bg small-m rounded">
+     <i class="fa-brands fa-python blue mid"></i>
+    </a>
+
+    <a onclick="savejs()" href="" download="index.js" 
+    class="dljs small-p dark2-bg small-m rounded">
+    <i class="fa-brands fa-js yell mid"></i>
+    </a>
+   
+    </span>
+
+       <span class="item">
+        <a onclick="page2()" class="small-p white-txt dark2-bg rounded">back</a>
+       </span>
+    </div>
+</div>
+
+
+</section>
+
+<section id="page4" class="hide fullscreen center dark">
+
+    <span class="item space2">
+
+        <a onclick="starthtml()"
+        class="small-p dark2-bg small-m rounded">
+        <i class="fa-brands fa-html5 red mid"></i>
+        </a>
+    
+        <a onclick="startpy()"
+        class="small-p dark2-bg small-m rounded">
+         <i class="fa-brands fa-python blue mid"></i>
+        </a>
+    
+        <a onclick="startjs()"
+        class="small-p dark2-bg small-m rounded">
+        <i class="fa-brands fa-js yell mid"></i>
+        </a>
+       
+        </span>
+
+        <span class="item">
+        <a onclick="page1()" class="small-p white-txt dark2-bg rounded">back</a>
+   </span>
+</section>
+
+<section id="page5" class="hide fullscreen center dark">
+    <span class="item">
+        <p class="caps white">
+            view code templates
+        </p>
+    </span>
+    <span class="item space2">
+
+        <a onclick="starthtml()"
+        class="small-p dark2-bg small-m rounded">
+        <i class="fa-brands fa-html5 red mid"></i>
+        </a>
+    
+        <a onclick="startpy()"
+        class="small-p dark2-bg small-m rounded">
+         <i class="fa-brands fa-python blue mid"></i>
+        </a>
+    
+        <a onclick="startjs()"
+        class="small-p dark2-bg small-m rounded">
+        <i class="fa-brands fa-js yell mid"></i>
+        </a>
+       
+        </span>
+
+        <span class="item">
+        <a onclick="page2()" class="small-p white-txt dark2-bg rounded">back</a>
+   </span>
+</section>
+
+   <script src="/data.js"></script>
+   <script src="encoder.js"></script>
+   <script src="ui.js"></script>
+   <script>
+       add = add_css_local()
+       run = sync()
+  function sync() {
+    localStorage.setItem("e", document.getElementById("e").value);
+
+      setTimeout(() => {
+      sync()
+    }, 100);
+       }
+   </script>
+
+</body>
+</html>
