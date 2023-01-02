@@ -55,18 +55,17 @@ Button code <a class="btn prim"><p class"White">Btn<p></a>
       <meta property="image" content="/img/banner.png">
       <meta property="description" content="My Site">
           
-      <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
-      <script src="https://cordzip.github.io/cz.js"></script>
-      <link rel="stylesheet" href="https://cordzip.github.io/cz.css">
-  
+      <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon"> 
+      
   </head>
-  <style>
-
-       @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap');
-  
-  </style>
   <body>
 
+  <script>
+  const config = [css = 'default', icon = 'fontawesome']
+  const configstate = 'defined'
+    </script>
+   <script src="https://futr.web.app/f.js">
+  </script> 
   </body>
   </html>`
 ];
