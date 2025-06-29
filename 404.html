@@ -115,13 +115,30 @@ slides{scrollbar-width:none}
 
 slide{
 flex-shrink:0;
-width:90%;
+width:50%;
 height:100%;
 background:var(--b2);
 
 scroll-snap-align:start;
 border-radius:1rem;
 }
+
+@media screen and (max-width: 650px) { 
+slides {
+width:100%;
+flex-direction: column !important;
+}
+slide{
+flex-shrink:0;
+width:100%;
+height:50%;
+background:var(--b2);
+
+scroll-snap-align:start;
+border-radius:1rem;
+}
+}
+
 </style>
 
 <slides>
@@ -272,23 +289,8 @@ iframeDoc.close();
 rBNod();
 
 
-fsh9GIK=() => {
-const _8472jbk =window.location.pathname.split('/').join('');;
-document.getElementById('fohpsf').value=_8472jbk;
-};
-
-document.addEventListener('DOMContentLoaded', function () {
 
 
-fsh9GIK();;
-
-setTimeout(() => {
-rBNod();;
-const btn = document.getElementById('subCo');
-btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-}, 0);
-
-});
 
 
 </script>
