@@ -1,196 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme:dark">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Hamkke</title>
-<meta name='description' content='A Collaborative Coding/Note online'>
-<meta name='keywords' content='Collaborative, Coding, Note, Online'>
-<meta name='author' content='Actwu'>
-<meta name='robots' content='index, follow'>
-<meta name='googlebot' content='index, follow'>
-<meta name='referrer' content='no-referrer-when-downgrade'>
-<link rel='icon' href='https://ise.web.app/fa/2.png'>
-<link rel='canonical' href=''>
-<meta property='og:title' content='Hamkke'>
-<meta property='og:description' content='A Collaborative Coding/Note online'>
-<meta property='og:image' content=''>
-<meta property='og:url' content=''>
-<meta property='og:type' content=''>
-<meta property='og:site_name' content='Hamkke'>
-<meta property='og:locale' content=''>
-<meta name='twitter:card' content='summary_large_image'>
-<meta name='twitter:title' content='Hamkke'>
-<meta name='twitter:description' content='A Collaborative Coding/Note online'>
-<meta name='twitter:image' content=''>
-<meta name='twitter:site' content=''>
-<meta name='twitter:creator' content=''>
+<title>Code | Nay</title>
+<meta name="description" content="code | Nay">
+<meta name="keywords" content="">
+<meta name="author" content="Nay">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%0A%3Ccircle%20cx%3D'32'%20cy%3D'32'%20r%3D'32'%20fill%3D'%23000000'%2F%3E%0A%3Ctext%20x%3D'32'%20y%3D'46'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23ffffff'%20font-family%3D'Arial'%20letter-spacing%3D'-1'%3E%E2%98%98%EF%B8%8F%3C%2Ftext%3E%0A%3C%2Fsvg%3E">
+<link rel="canonical" href="">
+<meta property="og:title" content="Code | Nay">
+<meta property="og:description" content="code | Nay">
+<meta property="og:image" content="">
+<meta property="og:url" content="">
+<meta property="og:type" content="">
+<meta property="og:site_name" content="code | Nay">
+<meta property="og:locale" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Code | Nay">
+<meta name="twitter:description" content="code | Nay">
+<meta name="twitter:image" content="">
+<meta name="twitter:site" content="">
+<meta name="twitter:creator" content="">
 
-<script type='application/ld+json'>
-{
-"@context":"https://schema.org",
-"@type":"Organization",
-"name":"Hamkke",
-"url":"",
-"logo":"https://ise.web.app/fa/2.png",
-"description":"A Collaborative Coding/Note online"
-}
-</script>
-<script type='application/ld+json'>
-{
-"@context":"https://schema.org",
-"@type":"BreadcrumbList",
-"itemListElement":[
+<meta name='google-site-verification' content=''>
+<meta name='msvalidate.01' content=''>
 
-]
-}
-</script>
+<link rel="manifest" href="manifest.json">
 
-<body>
-<style>
-body {
-margin: 0;
-font-family: monospace;
-color: #fff;
-background:#000;
-}
-
-#layout {
-display: flex;
-flex-direction: column;
-width: 100%;
-height: 100vh;
-}
-
-#preview, #editor-container {
-width: 100%;
-height: 50%;
-}
-
-#preview {
-border-bottom: 1px solid #222;
-background: none;
-border: none;
-}
-
-#editor-container {
-position: relative;
-background: none;
-}
-
-.monaco-editor, .monaco-editor .margin, .monaco-editor-background {
-background: transparent !important;
-}
-
-@media (min-width: 769px) {
-#layout {
-flex-direction: row-reverse;
-}
-
-#preview, #editor-container {
-width: 50%;
-height: 100%;
-}
-
-#preview {
-border-bottom: none;
-border-left: 1px solid #222;
-}
-}
-</style>
-<div id="layout">
-<iframe id="preview"></iframe>
-<div id="editor-container">
-<div id="editor" style="width:100%; height:100%;"></div>
-</div>
-</div>
-
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"code | Nay","url":"","logo":"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%0A%3Ccircle%20cx%3D'32'%20cy%3D'32'%20r%3D'32'%20fill%3D'%23000000'%2F%3E%0A%3Ctext%20x%3D'32'%20y%3D'46'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23ffffff'%20font-family%3D'Arial'%20letter-spacing%3D'-1'%3E%E2%98%98%EF%B8%8F%3C%2Ftext%3E%0A%3C%2Fsvg%3E","description":"code | Nay"}</script>
 <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;outline:none;border:none;font-family:monospace;}
+body{background:#000;display:flex;flex-direction:column;height:100svh;color:#fafaff;}
+#dock{background:#14141c;padding:12px 18px;border-radius:28px;margin-bottom:10px;display:flex;margin:auto;gap:14px;align-items:center;justify-content:center;}
+#switch{appearance:none;width:48px;height:24px;background:#24242c;border-radius:20px;position:relative;cursor:pointer;}
+#switch::after{content:"";width:20px;height:20px;background:#fafaff;position:absolute;top:2px;left:2px;border-radius:50%;}
+#switch:checked{background:#4aa3ff;}
+#switch:checked::after{left:26px;}
+#wrap{flex:1;display:flex;flex-direction:column;}
+#left{flex:1;display:flex;flex-direction:column;}
+#right{flex:1;background:#010101;overflow:auto;transition:width .25s;display:flex;flex-direction:column;}
+#right:hover,#right:active{width:70%;}
+textarea{flex:1;background:#000;color:#4aa3ff;padding:12px;font-size:16px;resize:none;font-family:monospace;}
+#monaco{flex:1;height:100%;}
+iframe{flex:1;width:100%;height:100%;border:none;background:#010101;}
+@media (orientation:landscape){#wrap{flex-direction:row;}#right{width:30%;}}
+.monaco-editor,.monaco-editor .margin,.monaco-editor-background{background:transparent !important;}
+</style>
+<body>
+<main id="wrap">
+<div id="left">
+<textarea id="plain" placeholder="Write HTML/CSS/JS here..."></textarea>
+<div id="monaco" hidden></div>
+</div>
+<div id="right">
+<iframe id="preview"></iframe>
+</div>
+</main>
+<div id="dock">
+<input type="checkbox" id="switch" aria-label="Toggle editor">
+</div>
 <script>
-const iframe = document.getElementById('preview');
-
-const initialCode = `
-
-<${"!DOCTYPE html"}>
-<${"html lang='en'"}>
-<${"meta charset='UTF-8'"}>
-<${"meta name='viewport' content='width=device-width, initial-scale=1.0'"}>
-<${"title"}>Test<${"/title"}>
-<${"link rel='canonical' href='https://actwu.github.io/test/'"}>
-<${"meta name='description' content='This is a test.'"}>
-<${"meta property='og:title' content='Actwu test'"}>
-<${"meta property='og:description' content='This is a test.'"}>
-<${"meta property='og:image' content=''"}>
-<${"meta property='og:url' content='https://actwu.github.io/test/'"}>
-<${"meta property='og:type' content='website'"}>
-<${"meta name='theme-color' content='#000'"}>
-<${"link rel='icon' href='icon.png'"}>
-<${"style"}>
-:root,*{--p:#3855d7;--b:#19191c;--f:#fafafa;--d:#202127;--font:sans-serif;--pad:1rem;--gap:10;--mar:0.3rem;--radius:8px;--maxw:100%;--midw:325px;--fz:1rem;--fz-lg:1.2rem;margin:0;padding:0;box-sizing:border-box;background-color:var(--b);color:var(--f);text-decoration:none;font-family:var(--font);border:unset;outline:unset;}
-*:not(:last-child){margin-bottom:var(--mar);}
-body{margin:0 auto auto;background:var(--b);color:var(--f);font-family:var(--font);display:flex;flex-direction:column;padding:5px;box-sizing:border-box;width:100vw;max-width:var(--midw);text-align:left;justify-content:center;place-content:center;align-content:center;min-height:100svh;}
-input,textarea,select{background:var(--b);color:var(--f);padding:var(--pad);border-radius:var(--radius);width:var(--maxw);max-width:var(--midw);font-size:var(--fz);box-sizing:border-box;outline:2px solid var(--d);}
-textarea{resize:vertical;}
-button,a,video{background:var(--d);color:var(--f);border:none;padding:var(--pad);border-radius:var(--radius);width:var(--maxw);max-width:var(--midw);font-size:var(--fz);box-sizing:border-box;}
-video,embed[video],embed[vid],iframe[video],iframe[vid]{aspect-ratio:16/9;}
-input,button,a{min-height:0.12in;min-width:0.3in;}
-span{display:flex;flex-wrap:wrap;flex-direction:row;align-items:center;justify-content:center;gap:var(--gap);}
-span>*{display:flex;flex:1;margin:0;}
-body>*:not(:last-child){margin-bottom:var(--mar);}
-span>*:not(:last-child){margin-right:var(--mar);}
-[p=''],[p='hover']:hover,[p='active']:active{background:var(--p);color:var(--f);cursor:pointer;}
-input[type='date']::-webkit-calendar-picker-indicator{opacity:0;position:absolute;right:0;width:100%;height:100%;cursor:pointer;}
-input[type='date']{position:relative;background:var(--b) url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fafafa' viewBox='0 0 24 24'%3E%3Cpath d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z'/%3E%3C/svg%3E') no-repeat right 1rem center;background-size:1rem;padding-right:2.5rem;color:var(--f);border-radius:var(--radius);font-size:var(--fz);width:var(--maxw);max-width:var(--midw);box-sizing:border-box;appearance:none;-webkit-appearance:none;-moz-appearance:none;outline:2px solid var(--d);cursor:pointer;}
-select,summary{background:var(--d);color:var(--f);border:none;padding:var(--pad);border-radius:var(--radius);width:var(--maxw);max-width:var(--midw);font-size:var(--fz);box-sizing:border-box;appearance:none;-webkit-appearance:none;-moz-appearance:none;}
-select,summary{background-image:url('data:image/svg+xml,%3Csvg viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23fafafa'/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 1rem center;background-size:1em;padding-right:2.5rem;cursor:pointer;}
-details{padding:0;max-width:var(--midw);border-radius:var(--radius);overflow:hidden;transition:all 0.3s ease-in-out;}
-summary{list-style:none;user-select:none;font-weight:bold;}
-summary::-webkit-details-marker{display:none;}
-[center]{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-[right]{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;text-align:right;}
-<${"/style"}>
-<${"body role='document'"}>
-<${"main role='main' aria-label='Main content'"}>
-<${"h1"}>Prod Ready?<${"/h1"}>
-<${"input type='text' placeholder='Your name' aria-label='Name'"}>
-<${"textarea placeholder='Your message' rows='4' aria-label='Message'"}><${"/textarea"}>
-<${"button p='hover'"}>Submit<${"/button"}>
-<${"span"}>
-<${"a href='#' p=''"}>Link 1<${"/a"}>
-<${"a href='#' p='hover'"}>Link 2<${"/a"}>
-<${"/span"}>
-<${"details"}>
-<${"summary"}>More Info<${"/summary"}>
-<${"p"}>This is additional information inside a collapsible section.<${"/p"}>
-<${"/details"}>
-<${"/main"}>
-<${"/body"}>
-<${"script"}>
-<${"/script"}>
-<${"/html"}>
-
-
-`;
-
-require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' }});
-
-require(['vs/editor/editor.main'], function () {
-const editor = monaco.editor.create(document.getElementById('editor'), {
-value: initialCode,
-language: 'html',
-theme: 'vs-dark',
-minimap: { enabled: false },
-automaticLayout: true
-});
-
-iframe.srcdoc = initialCode;
-
-editor.onDidChangeModelContent(() => {
-const val = editor.getValue();
-iframe.srcdoc = val;
-});
-});
+const plain=document.getElementById('plain')
+const monoDiv=document.getElementById('monaco')
+const switchInput=document.getElementById('switch')
+const preview=document.getElementById('preview')
+let monacoEditor=null
+const pathKey="htmlpreview_"+location.pathname.replace(/\W/g,'_')
+const saved=localStorage.getItem(pathKey)
+if(saved) plain.value=saved
+function updatePreview(){
+const code=switchInput.checked&&monacoEditor?monacoEditor.getValue():plain.value
+preview.srcdoc=code
+localStorage.setItem(pathKey,code)
+}
+require.config({paths:{vs:'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs'}})
+switchInput.onchange=()=>{
+const useMono=switchInput.checked
+plain.hidden=useMono
+monoDiv.hidden=!useMono
+if(useMono&&!monacoEditor){
+require(['vs/editor/editor.main'],()=>{
+monacoEditor=monaco.editor.create(monoDiv,{
+value:plain.value,
+language:'html',
+theme:'vs-dark',
+minimap:{enabled:false},
+automaticLayout:true,
+fontFamily:'monospace',
+wordWrap:'on'
+})
+monacoEditor.onDidChangeModelContent(updatePreview)
+updatePreview()
+})
+}else if(monacoEditor){monacoEditor.setValue(plain.value)}
+}
+plain.oninput=updatePreview
+updatePreview()
 </script>
-
 </body>
 </html>
