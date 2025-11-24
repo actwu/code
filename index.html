@@ -1,16 +1,39 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" style="color-scheme:dark">
 <head>
 <meta charset="UTF-8">
-<title>Code Dashboard</title>
-<meta name="description" content="code | Nay">
+
+ 
+<title>Code Dash | nay</title>
+<meta name="description" content="Just the dashboard of codeedito">
 <meta name="keywords" content="">
-<meta name="author" content="Nay">
+<meta name="author" content="Nay / Actwu">
 <meta name="robots" content="index, follow">
 <meta name="googlebot" content="index, follow">
 <meta name="referrer" content="no-referrer-when-downgrade">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%0A%3Ccircle%20cx%3D'32'%20cy%3D'32'%20r%3D'32'%20fill%3D'%23000000'%2F%3E%0A%3Ctext%20x%3D'32'%20y%3D'46'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23ffffff'%20font-family%3D'Arial'%20letter-spacing%3D'-1'%3E%E2%98%98%EF%B8%8F%3C%2Ftext%3E%0A%3C%2Fsvg%3E">
+<link rel="canonical" href="">
+<meta property="og:title" content="Code Dash | nay">
+<meta property="og:description" content="Just the dashboard of codeedito">
+<meta property="og:image" content="">
+<meta property="og:url" content="">
+<meta property="og:type" content="">
+<meta property="og:site_name" content="Nay">
+<meta property="og:locale" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Code Dash | nay">
+<meta name="twitter:description" content="Just the dashboard of codeedito">
+<meta name="twitter:image" content="">
+<meta name="twitter:site" content="">
+<meta name="twitter:creator" content="">
+
+<meta name='google-site-verification' content=''>
+<meta name='msvalidate.01' content=''>
+
 <link rel="manifest" href="manifest.json">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Nay","url":"","logo":"data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%0A%3Ccircle%20cx%3D'32'%20cy%3D'32'%20r%3D'32'%20fill%3D'%23000000'%2F%3E%0A%3Ctext%20x%3D'32'%20y%3D'46'%20font-size%3D'38'%20font-weight%3D'700'%20text-anchor%3D'middle'%20fill%3D'%23ffffff'%20font-family%3D'Arial'%20letter-spacing%3D'-1'%3E%E2%98%98%EF%B8%8F%3C%2Ftext%3E%0A%3C%2Fsvg%3E","description":"Just the dashboard of codeedito"}</script>
 <style>
 *{border:none;margin:0;outline:none;font-family:Helvetica;}
 body{display:flex;flex-direction:column;gap:12px;padding:20px;background:#000;color:#fafaff;max-width:899px;margin:auto;min-height:100vh;position:relative;}
@@ -46,20 +69,35 @@ button:hover{transform:scale(1.1);}
 <button id="new" onmousedown="choiceBox.hidden^=1">+</button>
 <section id="projects"></section>
 <script>
+const saveUrl=url=>{
+if(!url) return
+let prefix=""
+if(location.pathname.startsWith("/code/html/")) prefix="projhtml_"
+else if(location.pathname.startsWith("/code/py/")) prefix="projpy_"
+else return
+localStorage.setItem(prefix+url,"true")
+}
+addEventListener("load",()=>saveUrl(location.href))
+const oOpen=window.open
+window.open=function(u,...a){saveUrl(u);return oOpen.call(window,u,...a)}
+
 document.addEventListener('DOMContentLoaded',()=>{
 const projects=document.getElementById('projects');
 const choiceBox=document.getElementById('choiceBox');
+
 Object.keys(localStorage).forEach(k=>{
-if(k.startsWith('pyeditor_')||k.startsWith('htmlpreview_')){
-const url=localStorage.getItem(k);
+if(k.startsWith('projpy_')||k.startsWith('projhtml_')){
+const url=k.replace(/^proj(py|html)_/,'');
 const c=document.createElement('div');
 const s=document.createElement('span');
-s.textContent=k.slice(0,5);
+s.textContent=url.split('/').pop();
 c.appendChild(s);
 c.setAttribute('data-url',url);
 c.onmousedown=()=>window.open(url);
-projects.appendChild(c)
-}});
+projects.appendChild(c);
+}
+});
+
 choiceBox.querySelectorAll('div[data-type]').forEach(btn=>{
 btn.onmousedown=()=>{
 const type=btn.getAttribute('data-type');
@@ -68,13 +106,15 @@ const r=Math.random().toString(36).slice(2,8);
 const key=prefix+r;
 const url=type==='py'?'https://actwu.github.io/code/py/'+r:'https://actwu.github.io/code/web/'+r;
 localStorage.setItem(key,url);
+
 const c=document.createElement('div');
 const s=document.createElement('span');
-s.textContent=key.slice(0,5);
+s.textContent=url.split('/').pop();
 c.appendChild(s);
 c.setAttribute('data-url',url);
 c.onmousedown=()=>window.open(url);
 projects.appendChild(c);
+
 window.open(url);
 choiceBox.hidden=1;
 }
