@@ -112,11 +112,12 @@ const s=document.createElement('span');
 s.textContent=url.split('/').pop();
 c.appendChild(s);
 c.setAttribute('data-url',url);
-c.onmousedown=()=>window.open(url);
+c.onmousedown=()=>window.location.href=url;
 projects.appendChild(c);
 
 window.open(url);
 choiceBox.hidden=1;
+ 
 }
 })
 });
