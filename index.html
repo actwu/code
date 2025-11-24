@@ -2,94 +2,38 @@
 <html lang="en" style="color-scheme:dark">
 <head>
 <meta charset="UTF-8">
-<title>Code Dash | Nay</title>
-<meta name="description" content="Just the dashboard of codeedito">
-<meta name="author" content="Nay / Actwu">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23000000'/%3E%3Ctext x='32' y='46' font-size='38' font-weight='700' text-anchor='middle' fill='%23ffffff' font-family='Arial'%3E%E2%98%98%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<title>Code Loader | Nay</title>
 <style>
 *{border:none;margin:0;outline:none;font-family:Helvetica;}
 body{display:flex;flex-direction:column;gap:12px;padding:20px;background:#000;color:#fafaff;max-width:899px;margin:auto;min-height:100vh;position:relative;}
-button{padding:10px;font-size:24px;cursor:pointer;border-radius:50%;width:50px;height:50px;display:flex;justify-content:center;align-items:center;transition:0.2s;background:#14141C;color:#fff;}
-button:hover{transform:scale(1.1);}
-#choiceBox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);display:flex;flex-wrap:wrap;justify-content:center;align-items:center;z-index:999;}
-[hidden]{display:none !important;}
-#choiceBox>div{flex:1 1 150px;width:150px;height:150px;margin:12px;display:flex;justify-content:center;align-items:center;font-size:20px;color:#fff;border-radius:12px;font-weight:bold;cursor:pointer;transition:0.2s;background:#14141C;}
-#choiceBox>div[data-type="web"]{background:#ff4c4c;}
-#choiceBox>div[data-type="py"]{background:#9b59b6;}
-#choiceBox>span{position:absolute;top:20px;right:20px;font-size:24px;font-weight:bold;cursor:pointer;user-select:none;}
 #projects{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start;margin-top:5px;}
 #projects>div{width:120px;height:120px;border-radius:12px;color:#fff;display:flex;align-items:flex-end;padding:8px;font-weight:bold;cursor:pointer;transition:0.2s;position:relative;overflow:hidden;background:#14141C;}
 #projects>div:hover{transform:scale(1.05);}
 #projects>div>span{position:absolute;bottom:8px;left:8px;font-size:14px;}
-#projects>div:nth-child(8n+1){background:#ff4c4c;}
-#projects>div:nth-child(8n+2){background:#4c6fff;}
-#projects>div:nth-child(8n+3){background:#ffbf00;}
-#projects>div:nth-child(8n+4){background:#ff4cf0;}
-#projects>div:nth-child(8n+5){background:#9b59b6;}
-#projects>div:nth-child(8n+6){background:#1abc9c;}
-#projects>div:nth-child(8n+7){background:#e91e63;}
-#projects>div:nth-child(8n+8){background:#14141C;}
-@media(max-width:480px){#choiceBox>div{width:120px;height:120px;font-size:18px;}#projects>div{width:90px;height:90px;font-size:12px;}}
 </style>
 </head>
 <body>
-<section id="choiceBox" hidden>
-<span onmousedown="choiceBox.hidden=1">X</span>
-<div data-type="web">Web</div>
-<div data-type="py">Python</div>
-</section>
-<button id="new" onmousedown="choiceBox.hidden^=1">+</button>
 <section id="projects"></section>
 <script>
-const saveUrl=url=>{
-  if(!url) return
-  let prefix=""
-  if(location.pathname.startsWith("/code/html/")) prefix="projhtml_"
-  else if(location.pathname.startsWith("/code/py/")) prefix="projpy_"
-  else return
-  if(!localStorage.getItem(prefix+url)) localStorage.setItem(prefix+url,"true")
-}
-addEventListener("load",()=>saveUrl(location.href))
-const oOpen=window.open
-window.open=function(u,...a){saveUrl(u);return oOpen.call(window,u,...a)}
+const projects=document.getElementById('projects');
 
 document.addEventListener('DOMContentLoaded',()=>{
-const projects=document.getElementById('projects');
-const choiceBox=document.getElementById('choiceBox');
+  const keys=Object.keys(localStorage);
+  const seen=new Set();
 
-Object.keys(localStorage).forEach(k=>{
-  if(k.startsWith('projpy_')||k.startsWith('projhtml_')){
-    const url=k.replace(/^proj(py|html)_/,'');
-    const c=document.createElement('div');
-    const s=document.createElement('span');
-    s.textContent=url.split('/').pop();
-    c.appendChild(s);
-    c.setAttribute('data-url',url);
-    c.onmousedown=()=>window.open(url);
-    projects.appendChild(c);
-  }
-});
-
-choiceBox.querySelectorAll('div[data-type]').forEach(btn=>{
-  btn.onmousedown=()=>{
-    const type=btn.getAttribute('data-type');
-    const prefix=type==='py'?'projpy_':'projhtml_';
-    const r=Math.random().toString(36).slice(2,8);
-    const url=type==='py'?'https://actwu.github.io/code/py/'+r:'https://actwu.github.io/code/web/'+r;
-    if(!localStorage.getItem(prefix+url)) localStorage.setItem(prefix+url,url);
-
-    const c=document.createElement('div');
-    const s=document.createElement('span');
-    s.textContent=url.split('/').pop();
-    c.appendChild(s);
-    c.setAttribute('data-url',url);
-    c.onmousedown=()=>window.location.href=url;
-    projects.appendChild(c);
-
-    window.open(url);
-    choiceBox.hidden=1;
-  }
-})
+  keys.forEach(k=>{
+    if(k.startsWith('projpy_')||k.startsWith('projhtml_')){
+      const url=localStorage.getItem(k)===true || localStorage.getItem(k)==='true'? k.replace(/^proj(py|html)_/,'') : localStorage.getItem(k);
+      if(seen.has(url)) return; // avoid duplicates
+      seen.add(url);
+      const c=document.createElement('div');
+      const s=document.createElement('span');
+      s.textContent=url.split('/').pop();
+      c.appendChild(s);
+      c.onmousedown=()=>window.location.href=url;
+      projects.appendChild(c);
+    }
+  });
 });
 </script>
 </body>
