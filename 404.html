@@ -2,13 +2,10 @@
 <html lang="en" style="color-scheme:dark">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>Code | Nay</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23000000'/%3E%3Ctext x='32' y='46' font-size='38' font-weight='700' text-anchor='middle' fill='%23ffffff' font-family='Arial' letter-spacing='-1'%3E%E2%98%98%EF%B8%8F%3C/text%3E%3C/svg%3E">
-
 <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;outline:none;border:none;font-family:monospace;}
 body{background:#000;display:flex;flex-direction:column;height:100svh;color:#fafaff;}
@@ -27,7 +24,6 @@ textarea{flex:1;background:#000;color:#4aa3ff;padding:12px;font-size:16px;resize
 @media (orientation:landscape){#wrap{flex-direction:row;}#right{width:30%;}}
 .monaco-editor,.monaco-editor .margin,.monaco-editor-background{background:transparent !important;}
 </style>
-
 <body>
 <main id="wrap">
   <div id="left">
@@ -36,102 +32,84 @@ textarea{flex:1;background:#000;color:#4aa3ff;padding:12px;font-size:16px;resize
   </div>
   <div id="right"></div>
 </main>
-
 <div id="dock">
   <input type="checkbox" id="switch" aria-label="Toggle editor">
   <button id="run">Run</button>
 </div>
-
 <script>
-const plain = document.getElementById('plain');
-const mono = document.getElementById('monaco');
-const right = document.getElementById('right');
-const switchInput = document.getElementById('switch');
-const runBtn = document.getElementById('run');
-let monacoEditor = null;
-let pyodideReadyPromise = null;
-
-// detect mode from URL
-let mode = '';
-if(location.pathname.startsWith('/code/web')) mode='html';
-else if(location.pathname.startsWith('/code/py') || location.pathname.startsWith('/code/pi')) mode='python';
-
-runBtn.hidden = mode==='html';
-
-const pathKey = 'code_' + mode + '_' + location.pathname.replace(/\W/g,'_');
-
-// load saved code
-const saved = localStorage.getItem(pathKey);
-if(saved) plain.value = saved;
-
-// auto-save
+const plain=document.getElementById('plain')
+const mono=document.getElementById('monaco')
+const right=document.getElementById('right')
+const switchInput=document.getElementById('switch')
+const runBtn=document.getElementById('run')
+let monacoEditor=null
+let pyodideReadyPromise=null
+let mode=''
+if(location.pathname.startsWith('/code/web')) mode='html'
+else if(location.pathname.startsWith('/code/py')) mode='python'
+runBtn.hidden=mode==='html'
+const pathKey=(mode==='html'?'projhtml_':'projpy_')+location.pathname.replace(/\W/g,'_')
+const saved=localStorage.getItem(pathKey)
+if(saved) plain.value=saved
 function saveCode(){
-  const code = switchInput.checked && monacoEditor ? monacoEditor.getValue() : plain.value;
-  localStorage.setItem(pathKey, code);
+  const code=switchInput.checked&&monacoEditor?monacoEditor.getValue():plain.value
+  localStorage.setItem(pathKey,code)
+  const prefix=mode==='html'?'projhtml_':'projpy_'
+  localStorage.setItem(prefix+location.href,'true')
 }
-setInterval(saveCode,2000);
-
-// update preview for HTML
+setInterval(saveCode,2000)
 function updatePreview(){
   if(mode==='html'){
-    const code = switchInput.checked && monacoEditor ? monacoEditor.getValue() : plain.value;
-    right.innerHTML='';
-    const iframe = document.createElement('iframe');
-    iframe.srcdoc = code;
-    iframe.style.flex='1';
-    iframe.style.border='none';
-    right.appendChild(iframe);
+    const code=switchInput.checked&&monacoEditor?monacoEditor.getValue():plain.value
+    right.innerHTML=''
+    const iframe=document.createElement('iframe')
+    iframe.srcdoc=code
+    iframe.style.flex='1'
+    iframe.style.border='none'
+    right.appendChild(iframe)
   }
 }
-
-// Monaco toggle
-require.config({paths:{vs:'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs'}});
-switchInput.onchange = ()=>{
-  const use = switchInput.checked;
-  plain.hidden = use;
-  mono.hidden = !use;
+require.config({paths:{vs:'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs'}})
+switchInput.onchange=()=>{
+  const use=switchInput.checked
+  plain.hidden=use
+  mono.hidden=!use
   if(use){
     if(!monacoEditor){
       require(['vs/editor/editor.main'],()=>{
-        monacoEditor = monaco.editor.create(mono,{
-          value: plain.value,
-          language: mode==='html'?'html':'python',
+        monacoEditor=monaco.editor.create(mono,{
+          value:plain.value,
+          language:mode==='html'?'html':'python',
           theme:'vs-dark',
           minimap:{enabled:false},
           automaticLayout:true,
           fontFamily:'monospace',
           wordWrap:'on'
-        });
+        })
         monacoEditor.onDidChangeModelContent(()=>{
-          plain.value = monacoEditor.getValue();
-          saveCode();
-          if(mode==='html') updatePreview();
-        });
-        if(mode==='html') updatePreview();
-      });
-    } else {
-      monacoEditor.setValue(plain.value);
-      monacoEditor.updateOptions({language: mode==='html'?'html':'python'});
+          plain.value=monacoEditor.getValue()
+          saveCode()
+          if(mode==='html') updatePreview()
+        })
+        if(mode==='html') updatePreview()
+      })
+    }else{
+      monacoEditor.setValue(plain.value)
+      monacoEditor.updateOptions({language:mode==='html'?'html':'python'})
     }
-  } else if(monacoEditor){
-    plain.value = monacoEditor.getValue();
+  }else if(monacoEditor){
+    plain.value=monacoEditor.getValue()
   }
-};
-
-// HTML auto-preview on input
-plain.oninput = ()=>{ saveCode(); if(mode==='html') updatePreview(); };
-
-// Python runner
-async function loadPyodideAndRun(){ return await loadPyodide(); }
-if(mode==='python') pyodideReadyPromise = loadPyodideAndRun();
-
-runBtn.onclick = async ()=>{
-  if(mode!=='python') return;
-  const code = switchInput.checked && monacoEditor ? monacoEditor.getValue() : plain.value;
-  right.textContent = 'Running…';
+}
+plain.oninput=()=>{ saveCode(); if(mode==='html') updatePreview() }
+if(mode==='python') pyodideReadyPromise=loadPyodide()
+runBtn.onclick=async()=>{
+  if(mode!=='python') return
+  const code=switchInput.checked&&monacoEditor?monacoEditor.getValue():plain.value
+  right.textContent='Running…'
   try{
-    const pyodide = await pyodideReadyPromise;
-    const result = await pyodide.runPythonAsync(`
+    const pyodide=await pyodideReadyPromise
+    const result=await pyodide.runPythonAsync(`
 import sys
 from io import StringIO
 buf = StringIO()
@@ -141,12 +119,12 @@ sys.stderr = buf
 ${code}
 
 buf.getvalue()
-`);
-    right.textContent = result;
-  } catch(e){
-    right.textContent = 'Error: '+e;
+`)
+    right.textContent=result
+  }catch(e){
+    right.textContent='Error: '+e
   }
-};
+}
 </script>
 </body>
 </html>
