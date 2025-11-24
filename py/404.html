@@ -44,7 +44,7 @@ body{background:#000;display:flex;flex-direction:column;height:100svh;color:#faf
 #switch:checked{background:#4aa3ff;} 
 #switch:checked::after{left:26px;}
 button{background:#4aa3ff;color:#fafaff;padding:.7rem 1.2rem;border-radius:9999px;cursor:pointer;}
-#wrap{flex:1;display:flex;flex-direction:column;}
+#wrap{flex:1;display:flex;flex-direction:column-reverse;}
 #left{flex:1;display:flex;flex-direction:column;}
 #right{flex:1;display:flex;flex-direction:column;background:#010101;padding:12px;overflow:auto;transition:width .25s;}
 #right:hover,#right:active{width:70%;}
@@ -121,7 +121,8 @@ switchInput.onchange = () => {
           theme:'vs-dark',
           minimap:{enabled:false},
           automaticLayout:true,
-          fontFamily:'monospace'
+          fontFamily:'monospace',
+          wordWrap:'on'
         });
         monacoEditor.onDidChangeModelContent(()=>{
           plain.value = monacoEditor.getValue();
