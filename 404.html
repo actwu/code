@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;outline:none;border:none;font-family:monospace;}
+*{margin:0;padding:0;text-decoration:unset;box-sizing:border-box;outline:none;border:none;font-family:monospace;}
 body{background:#000;display:flex;flex-direction:column;height:100svh;color:#fafaff;}
 #dock{background:#14141c;padding:12px 18px;border-radius:28px;margin-bottom:10px;display:flex;margin:auto;gap:14px;align-items:center;justify-content:center;}
 #switch{appearance:none;width:48px;height:24px;background:#24242c;border-radius:20px;position:relative;cursor:pointer;}
@@ -25,6 +25,7 @@ textarea{flex:1;background:#000;color:#4aa3ff;padding:12px;font-size:16px;resize
 .monaco-editor,.monaco-editor .margin,.monaco-editor-background{background:transparent !important;}
 </style>
 <body>
+<a id="back" href="https://actwu.github.io/code"><</a>
 <main id="wrap">
   <div id="left">
     <textarea id="plain" placeholder="Write code here..."></textarea>
