@@ -103,5 +103,18 @@ updatePreview()
 plain.oninput=updatePreview
 updatePreview()
 </script>
+  <script>
+const saveUrl=url=>{
+  if(!url) return
+  let prefix=""
+  if(location.pathname.startsWith("/code/html/")) prefix="projhtml_"
+  else if(location.pathname.startsWith("/code/py/")) prefix="projpy_"
+  else return
+  localStorage.setItem(prefix+url,"true")
+}
+addEventListener("load",()=>saveUrl(location.href))
+const oOpen=window.open
+window.open=function(u,...a){saveUrl(u);return oOpen.call(window,u,...a)}
+  </script>
 </body>
 </html>
