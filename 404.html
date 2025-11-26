@@ -103,6 +103,7 @@ switchInput.onchange=()=>{
   }
 }
 plain.oninput=()=>{ saveCode(); if(mode==='html') updatePreview() }
+  if(mode==='html') updatePreview();
 if(mode==='python') pyodideReadyPromise=loadPyodide()
 runBtn.onclick=async()=>{
   if(mode!=='python') return
